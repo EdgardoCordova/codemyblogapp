@@ -1,0 +1,23 @@
+
+{% extends 'base.html' %}
+
+{% block title %} 
+    My Blog DETAIL
+{% endblock %}
+
+{% block content %}
+
+    <h1> {{ post.title }}</h1>
+    By:
+    {{ post.author.first_name }} 
+    {{ post.author.last_name }} - 
+    {{ post.post_date }} -
+    <a href="{% url 'update_post' post.pk %}"><small>[Edit]</small></a>
+    <hr>
+    <br/>
+    {{ post.body}}
+
+    <br/><br/>
+    <a href="{% url 'home' %}" class="btn btn-secondary"> Back </a>
+
+{% endblock %}

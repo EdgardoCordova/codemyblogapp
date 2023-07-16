@@ -1,1 +1,20 @@
-<h1> hello world !!!! </h1>
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1> Posts </h1>
+
+<ul>
+{% for post in object_list %}
+    <li>
+        <a href="{% url 'article-detail' post.pk %}">
+        {{ post.title }} </a>- {{ post.post_date }} - {{ post.author.first_name }} {{ post.author.last_name }} 
+        <a href="{% url 'delete_post' post.pk %}"><small>[Erase]</small></a>
+        <a href="{% url 'update_post' post.pk %}"><small>[Edit]</small></a>
+        <br/>
+        {{ post.body}}
+    </li>
+{% endfor %}
+</ul>
+
+{% endblock %}
