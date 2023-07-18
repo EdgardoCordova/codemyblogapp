@@ -1,13 +1,14 @@
 {% extends 'base.html' %}
 {% block title %} 
-    Update Blog
+    Create a new Category
 {% endblock %}
 {% block content %}
 
 {% if user.is_authenticated %}
-    {% if user.id == post.author.id %}
+  
         <div class="form-group"> 
-            <h1> Edit Post </h1>
+            <h1> Add Category </h1>
+            <br/>
             <br/>
             <div class="container"> 
 
@@ -20,9 +21,7 @@
             </form>
             </div> 
         </div>
-    {% else %}
-        You are not ALLOWED HERE!
-    {% endif %}            
+  
 {% else %}
     You are not ALLOWED HERE!
 {% endif %}

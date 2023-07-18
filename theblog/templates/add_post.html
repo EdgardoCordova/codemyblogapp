@@ -4,19 +4,31 @@
 {% endblock %}
 {% block content %}
 
-<div class="form-group"> 
-    <h1> Add Post </h1>
-    <br/>
-    <br/>
-    <div class="container"> 
+{% if user.is_authenticated %}
+   
+        <div class="form-group"> 
+            <h1> Add Post </h1>
+            <br/>
+            <br/>
+            <div class="container"> 
 
-    <form method= "POST"> 
-        {% csrf_token %}
-        {{ form.as_p }} 
-        <button class="btn btn-secondary">
-            POST
-        </button>
-    </form>
-    </div> 
-</div>
+            <form method= "POST"> 
+                {% csrf_token %}
+                {{ form.as_p }} 
+                <button class="btn btn-secondary">
+                    POST
+                </button>
+            </form>
+            </div> 
+        </div>
+        <script>
+            var name = "{{ user.id }}";
+            document.getElementById("usuario").value = name;
+        </script>
+    
+        
+{% else %}
+    You are not ALLOWED HERE!
+{% endif %}
+
 {% endblock %}

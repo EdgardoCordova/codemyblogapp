@@ -8,11 +8,21 @@
 {% for post in object_list %}
     <li>
         <a href="{% url 'article-detail' post.pk %}">
-        {{ post.title }} </a>- {{ post.post_date }} - {{ post.author.first_name }} {{ post.author.last_name }} 
-        <a href="{% url 'delete_post' post.pk %}"><small>[Erase]</small></a>
-        <a href="{% url 'update_post' post.pk %}"><small>[Edit]</small></a>
+        {{ post.title }} </a> - 
+        {{ post.post_date }} - 
+        <a href="{% url 'category' post.category %}">
+        {{ post.category|slugify }}</a> - 
+        {{ post.author.first_name }} {{ post.author.last_name }} 
+
+        {% if user.is_authenticated %}
+            {% if user.id == post.author.id %}
+                <a href="{% url 'delete_post' post.pk %}"><small>[Erase]</small></a>
+                <a href="{% url 'update_post' post.pk %}"><small>[Edit]</small></a>
+            {% endif %}
+        {% endif %}
+
         <br/>
-        {{ post.body}}
+        {{ post.body|slice:":80"|safe }} 
     </li>
 {% endfor %}
 </ul>

@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if category_posts %}
+
+    <h1> {{ cats }} Category Page </h1>
+    <ul>
+    {% for post in category_posts %}
+        <li>
+            <a href="{% url 'article-detail' post.pk %}">
+            {{ post.title }} </a>- {{ post.post_date }} - 
+            {{ post.author.first_name }} {{ post.author.last_name }} 
+
+            {% if user.is_authenticated %}
+                {% if user.id == post.author.id %}
+                    <a href="{% url 'delete_post' post.pk %}"><small>[Erase]</small></a>
+                    <a href="{% url 'update_post' post.pk %}"><small>[Edit]</small></a>
+                {% endif %}
+            {% endif %}
+
+            <br/>
+            {{ post.body|slice:":80"|safe }} 
+        </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    Sorry this page is not available!
+{% endif %}    
+{% endblock %}
