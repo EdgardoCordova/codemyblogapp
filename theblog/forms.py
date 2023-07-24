@@ -13,7 +13,7 @@ for item in options:
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ('title','title_tag','author', 'category','body')
+        fields = ('title','title_tag','author', 'category','body', 'snippet','header_image')
 
     # ojo despues de campos no lleva "=" sino ":"    
     # el form control lo controlaremos con un <div class="form-group"> .... </div> 
@@ -27,12 +27,13 @@ class PostForm(forms.ModelForm):
             #'author':  forms.Select(attrs={'class': 'form-control'}),
             'category':  forms.Select(choices=option_list, attrs={'class': 'form-control'}),
             'body':  forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Detalle del blog'}),
+            'snippet':  forms.Textarea(attrs={'class': 'form-control', 'placeholder': '...'}),
         }
 
 class EditarForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ('title', 'title_tag', 'category', 'body')
+        fields = ('title', 'title_tag', 'category', 'body', 'snippet')
 
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Titulo'}),
@@ -40,4 +41,5 @@ class EditarForm(forms.ModelForm):
             'author':  forms.Select(attrs={'class': 'form-control'}),
             'category':  forms.Select(choices=option_list, attrs={'class': 'form-control', 'placeholder': 'Categoria'}),
             'body':  forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Detalle del blog'}),
+            'snippet':  forms.Textarea(attrs={'class': 'form-control', 'placeholder': '...'}),
         }

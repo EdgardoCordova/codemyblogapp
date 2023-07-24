@@ -16,12 +16,14 @@
                 {% csrf_token %}
                 {{ form.as_p }} 
                 <button class="btn btn-secondary">
-                    SAVE
+                    guardar
                 </button>
             </form>
             </div> 
         </div>
-  
+    {% else %}
+        You are not ALLOWED HERE!
+    {% endif %}    
 {% else %}
     You are not ALLOWED HERE!
 {% endif %}

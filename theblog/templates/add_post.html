@@ -12,15 +12,17 @@
             <br/>
             <div class="container"> 
 
-            <form method= "POST"> 
+            <form method= "POST" enctype="multipart/form-data"> 
                 {% csrf_token %}
+                {{ form.media }} 
                 {{ form.as_p }} 
                 <button class="btn btn-secondary">
-                    POST
+                    guardar
                 </button>
             </form>
             </div> 
         </div>
+
         <script>
             var name = "{{ user.id }}";
             document.getElementById("usuario").value = name;

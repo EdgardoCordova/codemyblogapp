@@ -22,6 +22,10 @@
 
     <hr>
     <br/>
+    {% if post.header_image %}
+        <img class="img-thumbnail" src="{{ post.header_image.url}}"> <br/><br/>
+    {% endif %}
+
     {{ post.body|safe}}
 
     <br/><br/>
@@ -43,5 +47,39 @@
         {% endif %}
         {{ total_likes }} Likes
     </form>
+<hr/>
+<br/>
+<br/>
+<div class="card mb-3" >
+    <div class="row g-0">
+      <div class="col-md-2">
+        <img src="{{ post.author.profile.profile_pic.url }}" class="img-fluid rounded-start" width=200 heigth=200>
+      </div>
+      <div class="col-md-10">
+        <div class="card-body">
+          <h5 class="card-title">{{ post.author.first_name }} 
+            {{ post.author.last_name }}</h5>
+
+        <p class="small text-muted">
+            {% if post.author.profile.website_url %}
+                |  <a href="{{ post.author.profile.website_url}}" >website</a>       
+            {% endif %}
+            {% if post.author.profile.website_url %}
+                |  <a href="{{ post.author.profile.facebook_url}}" >facebook</a>   
+            {% endif %} 
+            {% if post.author.profile.website_url %}
+                |  <a href="{{ post.author.profile.twitter_url}}" >twitter</a>
+            {% endif %}
+        </p>
+
+          <p class="card-text">
+            {{ post.author.profile.bio}}
+          </p>
+          <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
 
 {% endblock %}

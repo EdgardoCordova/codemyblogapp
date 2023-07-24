@@ -22,7 +22,8 @@
         {% endif %}
 
         <br/>
-        {{ post.body|slice:":80"|safe }} 
+        {{ post.snippet|slice:":80" }}
+        <!--{{ post.body|slice:":80"|safe }} reemplazado por snippet -->
     </li>
 {% endfor %}
 </ul>
