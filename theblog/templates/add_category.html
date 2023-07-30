@@ -4,7 +4,7 @@
 {% endblock %}
 {% block content %}
 
-{% if user.is_authenticated %}
+    {% if user.is_authenticated %}
   
         <div class="form-group"> 
             <h1> Add Category </h1>
@@ -24,8 +24,5 @@
     {% else %}
         You are not ALLOWED HERE!
     {% endif %}    
-{% else %}
-    You are not ALLOWED HERE!
-{% endif %}
 
 {% endblock %}

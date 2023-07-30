@@ -51,25 +51,38 @@
                 <li class="nav-item">
                   <a class="nav-link active" aria-current="page" href="{% url 'add_category' %}">Add Category</a>
                 </li>       
-                <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="{% url 'edit_profile' %}">Edit Profile</a>
-                </li>       
-                <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="{% url 'logout' %}">Logout</a>
-                </li>
+                
             {% else%}
                 <li class="nav-item">
                   <a class="nav-link active" aria-current="page" href="{% url 'register' %}">Register</a>
                 </li>
-                  
                 <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="{% url 'login' %}">Login</a>
-                </li>
-                
+                  <a class="nav-link active" aria-current="page" href="{% url 'login' %}"> Login </a>
+                </li>                              
             {% endif %}
                
             </ul>
-            
+            {% if user.is_authenticated %}
+                <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      {{ user.first_name }}
+                      {{ user.last_name }}
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-right">
+                      <li><a class="dropdown-item" href="{% url 'edit_profile' %}">Edit Settings</a></li>
+                      {% if user.profile.id %}  
+                        <li><a class="dropdown-item" href="{% url 'edit_profile_page' user.profile.id %}">Edit Profile Page</a></li>
+                        <li><a class="dropdown-item" href="{% url 'show_profile_page' user.profile.id %}">Show Profile Page</a></li>
+                      {% else %}
+                        <li><a class="dropdown-item" href="{% url 'create_profile_page' %}">Create Profile Page</a></li>
+                      {% endif %}
+                        <a class="dropdown-item" aria-current="page" href="{% url 'logout' %}">Logout</a>
+                    </ul>
+                  </li>
+                </ul>
+            {% endif %}
+
           </div>
         </div>
       </nav>    

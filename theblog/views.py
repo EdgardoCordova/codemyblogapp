@@ -1,11 +1,23 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from .models import Post, Category
-from .forms import PostForm, EditarForm
+from .models import Post, Category, Comment
+from .forms import PostForm, EditarForm, CommentForm
 from django.urls import reverse_lazy, reverse
 from django.http import HttpResponseRedirect
 
 # Create your views here.
+# class views:
+#   HomeView
+#   ArticleDetailView
+#   AddPostView
+#   UpdatePostView
+#   DeletePostView
+#   AddCategoryView
+#   AddCommentView
+# function views:
+#   CategoryListView
+#   CategoryView
+#   LikeView
 
 #def home(request):
 #    return render(request, 'home.html', {})
@@ -28,6 +40,7 @@ class HomeView(ListView):
 class ArticleDetailView(DetailView):
     model = Post
     template_name = 'article_detail.html'
+    #ordering = ['-date_added'] no funciono
 
     def get_context_data(self, *args, **kwargs):
         cat_menu = Category.objects.all()
@@ -49,7 +62,7 @@ class AddPostView(CreateView):
     template_name = 'add_post.html'
     #fields = '__all__',     ...................no pueden haber form_class y fields en la misma clase
     #fields = ('title','title_tag','body')
-
+            
 class UpdatePostView(UpdateView):
     model = Post
     form_class = EditarForm
@@ -86,5 +99,16 @@ def LikeView(request, pk):
         liked = True
     return HttpResponseRedirect(reverse('article-detail', args=[str(pk)]))
 
+class AddCommentView(CreateView):
+    model = Comment
+    form_class = CommentForm
+    template_name = 'add_comment.html'
+    #fields = '__all__'
+    success_url = reverse_lazy('home')
+
+      # siguiente funcion reemplaza el codigo java script que usamos anteriormente
+    def form_valid(self, form):
+        form.instance.post_id = self.kwargs['pk']
+        return super().form_valid(form)
 
 

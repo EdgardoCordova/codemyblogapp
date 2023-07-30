@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %} 
+    Edit Profile Page
+{% endblock %}
+{% block content %}
+
+{% if user.is_authenticated %}
+    {% if user.id == profile.user.id %}
+        <div class="form-group"> 
+            <h1> Edit Profile Page </h1>
+            <br/>
+            <br/>
+            <div class="container"> 
+
+            <form method= "POST" enctype="multipart/form-data"> 
+                {% csrf_token %}
+                {{ form.media }}
+                {{ form.as_p }} 
+                <button class="btn btn-secondary">
+                    guardar
+                </button>
+            </form>
+            </div> 
+        </div>
+    {% else %}
+        You are not ALLOWED HERE! It's not your profile.
+    {% endif %}
+        
+{% else %}
+    You are not ALLOWED HERE!
+{% endif %}
+
+{% endblock %}

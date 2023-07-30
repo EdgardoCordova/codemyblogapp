@@ -10,15 +10,14 @@
             <h1> Edit Post </h1>
             <br/>
             <div class="container"> 
-
-            <form method= "POST"> 
-                {% csrf_token %}
-                {{ form.media }}
-                {{ form.as_p }} 
-                <button class="btn btn-secondary">
-                    SAVE
-                </button>
-            </form>
+                <form method= "POST"> 
+                    {% csrf_token %}
+                    
+                    {{ form.as_p }} 
+                    <button class="btn btn-secondary">
+                        SAVE
+                    </button>
+                </form>
             </div> 
         </div>
     {% else %}
